@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lavkar — Quick wins with Microsoft Power Platform</title>
+<meta name="description" content="Practical guides on Copilot Studio, Power Apps, Azure and Dynamics 365 by Chinmay Gandi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #1a1a18; --ink2: #4a4a46; --ink3: #9a9a94;
+    --paper: #f9f7f2; --accent: #2d6a4f; --accent-light: #e8f4ee;
+    --border: #e2dfd6;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--paper); color: var(--ink); font-size: 16px; line-height: 1.6; min-height: 100vh; }
+
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(249,247,242,0.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 56px;
+  }
+  .nav-logo { font-family: var(--serif); font-size: 1.3rem; color: var(--ink); text-decoration: none; letter-spacing: -0.02em; }
+  .nav-logo span { color: var(--accent); font-style: italic; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { font-size: 0.85rem; font-weight: 400; color: var(--ink2); text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+
+  .hero { max-width: 760px; margin: 0 auto; padding: 6rem 2rem 4rem; opacity: 0; transform: translateY(20px); animation: fadeUp 0.7s ease forwards 0.1s; }
+  .hero-eyebrow { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.6rem; }
+  .hero-eyebrow::before { content: ''; display: inline-block; width: 24px; height: 1px; background: var(--accent); }
+  .hero h1 { font-family: var(--serif); font-size: clamp(2.4rem, 5vw, 3.6rem); line-height: 1.15; letter-spacing: -0.03em; color: var(--ink); margin-bottom: 1.4rem; }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero-sub { font-size: 1.05rem; color: var(--ink2); font-weight: 300; max-width: 520px; line-height: 1.7; margin-bottom: 2rem; }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .tag { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.03em; padding: 0.3rem 0.8rem; border-radius: 2rem; border: 1px solid var(--border); color: var(--ink2); background: white; transition: all 0.2s; cursor: default; }
+  .tag:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+
+  .divider { max-width: 760px; margin: 0 auto; padding: 0 2rem; border-top: 1px solid var(--border); }
+
+  .posts-section { max-width: 760px; margin: 0 auto; padding: 3.5rem 2rem; opacity: 0; transform: translateY(20px); animation: fadeUp 0.7s ease forwards 0.3s; }
+  .section-label { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink3); margin-bottom: 2rem; }
+  .post-list { list-style: none; }
+
+  .post-item { display: grid; grid-template-columns: 80px 1fr; gap: 0 1.5rem; align-items: start; padding: 1.4rem 0; border-bottom: 1px solid var(--border); text-decoration: none; color: inherit; transition: all 0.2s; }
+  .post-item:first-child { border-top: 1px solid var(--border); }
+  .post-item:hover .post-title { color: var(--accent); }
+  .post-item:hover .post-arrow { transform: translateX(4px); opacity: 1; }
+
+  .post-date { font-size: 0.78rem; color: var(--ink3); font-weight: 400; padding-top: 0.2rem; line-height: 1.4; }
+  .post-meta-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+  .post-content { flex: 1; }
+  .post-tag { display: inline-block; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; color: var(--accent); background: var(--accent-light); padding: 0.15rem 0.55rem; border-radius: 2rem; margin-bottom: 0.4rem; }
+  .post-title { font-family: var(--serif); font-size: 1.15rem; line-height: 1.3; letter-spacing: -0.01em; color: var(--ink); transition: color 0.2s; display: block; margin-bottom: 0.3rem; }
+  .post-desc { font-size: 0.875rem; color: var(--ink2); font-weight: 300; line-height: 1.5; }
+  .post-arrow { font-size: 1rem; color: var(--accent); opacity: 0; transition: all 0.2s; padding-top: 0.2rem; flex-shrink: 0; }
+
+  .about-section { max-width: 760px; margin: 0 auto; padding: 3.5rem 2rem; opacity: 0; transform: translateY(20px); animation: fadeUp 0.7s ease forwards 0.5s; }
+  .about-card { background: white; border: 1px solid var(--border); border-radius: 4px; padding: 2.5rem; display: grid; grid-template-columns: auto 1fr; gap: 2rem; align-items: start; }
+  .avatar { width: 64px; height: 64px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 1.5rem; color: white; flex-shrink: 0; }
+  .about-name { font-family: var(--serif); font-size: 1.4rem; letter-spacing: -0.02em; margin-bottom: 0.4rem; }
+  .about-role { font-size: 0.85rem; color: var(--accent); font-weight: 500; letter-spacing: 0.03em; margin-bottom: 0.9rem; }
+  .about-bio { font-size: 0.925rem; color: var(--ink2); font-weight: 300; line-height: 1.7; margin-bottom: 1.2rem; }
+  .contact-link { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.83rem; font-weight: 500; color: var(--accent); text-decoration: none; letter-spacing: 0.02em; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+  .contact-link:hover { border-color: var(--accent); }
+
+  footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--ink3); font-weight: 300; }
+  footer a { color: var(--accent); text-decoration: none; }
+
+  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+  @media (max-width: 600px) {
+    .about-card { grid-template-columns: 1fr; }
+    .post-item { grid-template-columns: 60px 1fr; gap: 0 1rem; }
+    nav { padding: 0 1rem; }
+    .nav-links { gap: 1.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Lav<span>kar</span></a>
+  <ul class="nav-links">
+    <li><a href="#posts">Posts</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <p class="hero-eyebrow">Microsoft tech blog</p>
+  <h1>Build quick.<br><em>Automate smart.</em></h1>
+  <p class="hero-sub">Practical guides on Copilot Studio, Power Apps, Azure and Dynamics 365 — written by a developer who does this every day.</p>
+  <div class="tag-row">
+    <span class="tag">Copilot Studio</span>
+    <span class="tag">Power Apps</span>
+    <span class="tag">Azure</span>
+    <span class="tag">Dynamics 365</span>
+    <span class="tag">Power Automate</span>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="posts-section" id="posts">
+  <p class="section-label">Recent posts</p>
+  <ul class="post-list">
+
+    <a class="post-item" href="posts/credential-for-running-agent-flows.html">
+      <div class="post-date">Jan 31<br>2026</div>
+      <div class="post-meta-row">
+        <div class="post-content">
+          <span class="post-tag">Copilot Studio</span>
+          <span class="post-title">Credential for running agent flows</span>
+          <span class="post-desc">How to configure credentials so your agent flows run under a service account or end user context.</span>
+        </div>
+        <span class="post-arrow">→</span>
+      </div>
+    </a>
+
+    <a class="post-item" href="posts/sharing-the-agent-with-org-or-users.html">
+      <div class="post-date">Jan 5<br>2026</div>
+      <div class="post-meta-row">
+        <div class="post-content">
+          <span class="post-tag">Copilot Studio</span>
+          <span class="post-title">Sharing the agent with Org or users</span>
+          <span class="post-desc">Step-by-step guide to sharing your Copilot Studio agent with specific users or your entire organisation.</span>
+        </div>
+        <span class="post-arrow">→</span>
+      </div>
+    </a>
+
+    <a class="post-item" href="posts/opening-sharepoint-attachment-in-a-new-tab.html">
+      <div class="post-date">Aug 8<br>2025</div>
+      <div class="post-meta-row">
+        <div class="post-content">
+          <span class="post-tag">Power Apps</span>
+          <span class="post-title">Opening SharePoint attachment in a new tab</span>
+          <span class="post-desc">A quick trick — append ?web=1 to open SharePoint list attachments in browser instead of downloading.</span>
+        </div>
+        <span class="post-arrow">→</span>
+      </div>
+    </a>
+
+    <a class="post-item" href="posts/saving-money-with-power-automate-premium.html">
+      <div class="post-date">Jul 26<br>2025</div>
+      <div class="post-meta-row">
+        <div class="post-content">
+          <span class="post-tag">Power Automate</span>
+          <span class="post-title">Saving money with Power Automate Premium at org level</span>
+          <span class="post-desc">Use service account connections in Run Only Users to avoid buying premium licenses for every employee.</span>
+        </div>
+        <span class="post-arrow">→</span>
+      </div>
+    </a>
+
+  </ul>
+</section>
+
+<div class="divider"></div>
+
+<section class="about-section" id="about">
+  <p class="section-label">About</p>
+  <div class="about-card">
+    <div class="avatar">C</div>
+    <div>
+      <p class="about-name">Chinmay Gandi</p>
+      <p class="about-role">Copilot · Azure · Power Platform — Boston, MA</p>
+      <p class="about-bio">I'm a developer working daily with Microsoft's Power Platform stack — building Copilot Studio agents, Power Apps, Azure integrations and Dynamics 365 solutions. Lavkar (लवकर) means <em>quick</em> in Marathi. That's the whole idea: quick, practical posts that get you unstuck fast.</p>
+      <a class="contact-link" href="mailto:chinmaygandipremium@gmail.com">Get in touch →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Lavkar · Chinmay Gandi · Boston, MA</p>
+</footer>
+
+</body>
+</html>

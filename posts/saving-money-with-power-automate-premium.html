@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saving Money with Power Automate Premium — Lavkar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --ink: #1a1a18; --ink2: #4a4a46; --ink3: #9a9a94; --paper: #f9f7f2; --accent: #2d6a4f; --accent-light: #e8f4ee; --border: #e2dfd6; --serif: 'DM Serif Display', Georgia, serif; --sans: 'DM Sans', system-ui, sans-serif; }
+  body { font-family: var(--sans); background: var(--paper); color: var(--ink); font-size: 16px; line-height: 1.6; }
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(249,247,242,0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 56px; }
+  .nav-logo { font-family: var(--serif); font-size: 1.3rem; color: var(--ink); text-decoration: none; letter-spacing: -0.02em; }
+  .nav-logo span { color: var(--accent); font-style: italic; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { font-size: 0.85rem; color: var(--ink2); text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+  .post-wrap { max-width: 720px; margin: 0 auto; padding: 4rem 2rem 6rem; }
+  .back-link { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.83rem; color: var(--ink3); text-decoration: none; margin-bottom: 2.5rem; transition: color 0.2s; }
+  .back-link:hover { color: var(--accent); }
+  .post-tag { display: inline-block; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); background: var(--accent-light); padding: 0.25rem 0.7rem; border-radius: 2rem; margin-bottom: 1rem; }
+  .post-title { font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1.2; letter-spacing: -0.03em; margin-bottom: 1rem; }
+  .post-meta { font-size: 0.83rem; color: var(--ink3); margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
+  .post-body { font-size: 1rem; line-height: 1.8; color: var(--ink2); }
+  .post-body p { margin-bottom: 1.4rem; }
+  .post-body strong { color: var(--ink); font-weight: 500; }
+  .post-body img { width: 100%; border-radius: 4px; margin: 1.5rem 0; border: 1px solid var(--border); }
+  .post-body a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .callout-green { background: var(--accent-light); border-left: 3px solid var(--accent); padding: 1rem 1.2rem; border-radius: 0 4px 4px 0; margin: 1.5rem 0; }
+  .callout-warn { background: #fdecea; border-left: 3px solid #c0392b; padding: 1rem 1.2rem; border-radius: 0 4px 4px 0; margin: 1.5rem 0; }
+  .callout-warn strong { color: #c0392b; }
+  footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--ink3); }
+  footer a { color: var(--accent); text-decoration: none; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo">Lav<span>kar</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html#posts">Posts</a></li>
+    <li><a href="../index.html#about">About</a></li>
+  </ul>
+</nav>
+
+<article class="post-wrap">
+  <a href="../index.html" class="back-link">← All posts</a>
+  <span class="post-tag">Power Automate</span>
+  <h1 class="post-title">Saving money with Power Automate Premium at org level</h1>
+  <p class="post-meta">July 26, 2025 &nbsp;·&nbsp; Chinmay Gandi</p>
+
+  <div class="post-body">
+    <p>Power Automate flows have an option called <strong>Run only users</strong> to specify in whose context the flow will run.</p>
+
+    <img src="https://justpowerplatform.wordpress.com/wp-content/uploads/2025/07/image-1.png" alt="Run only users option in Power Automate" />
+
+    <p>You can have basic Microsoft licenses for all employees in the organization. If your flow is not using premium connectors or actions, the flow can be triggered by any user in the org.</p>
+
+    <p>But if your flow <em>is</em> using premium actions or connectors — instead of buying a premium license for all employees, you can buy premium licenses for just a few service accounts and make them the owner of the flow.</p>
+
+    <div class="callout-green">
+      In the flow's <strong>Run only users</strong> settings, select the service account connection rather than "Provided by run-only user". This way, basic-license employees can trigger the flow, but it runs under the service account. <strong>BOOM — you save cost.</strong>
+    </div>
+
+    <img src="https://justpowerplatform.wordpress.com/wp-content/uploads/2025/07/image-2.png" alt="Selecting service account connection in run only users" />
+
+    <div class="callout-warn">
+      <strong>Catch — read this carefully:</strong>
+      <p style="margin-top:0.6rem;margin-bottom:0">This option is available only for <strong>instant flows</strong> — meaning the flow must be triggered from Power Automate or Power Apps.</p>
+      <p style="margin-top:0.8rem;margin-bottom:0">Also remember: the flow runs under the service account's context. So if you have a premium connector that sends an email and you set the service account as the connection, the email will be sent <em>from that service account</em> — not from the user who triggered the flow. If you need to send email from the triggering user, this workaround won't help for that connector.</p>
+    </div>
+  </div>
+</article>
+
+<footer>
+  <p>© 2026 Lavkar · Built by <a href="../index.html">Chinmay Gandi</a></p>
+</footer>
+</body>
+</html>
