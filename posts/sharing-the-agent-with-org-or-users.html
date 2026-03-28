@@ -3,13 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sharing the agent with Org or users — Lavkar</title>
+<title>Sharing Copilot Studio agent with Org or users — Lavkar</title>
+<meta name="description" content="Step-by-step guide to sharing your Copilot Studio agent with specific users or your entire organisation using Entra ID in Microsoft Power Platform.">
+<meta name="author" content="Chinmay Gandi">
+<meta name="keywords" content="Copilot Studio share agent, share with org, Entra ID, Microsoft Teams, Power Platform, Copilot Studio tutorial">
+<link rel="canonical" href="https://lavkar.com/posts/sharing-the-agent-with-org-or-users.html">
+
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://lavkar.com/posts/sharing-the-agent-with-org-or-users.html">
+<meta property="og:title" content="Sharing Copilot Studio agent with Org or users">
+<meta property="og:description" content="Step-by-step guide to sharing your Copilot Studio agent with specific users or your entire organisation using Entra ID.">
+<meta property="og:site_name" content="Lavkar">
+<meta property="article:published_time" content="2026-01-05">
+<meta property="article:author" content="Chinmay Gandi">
+<meta property="article:tag" content="Copilot Studio">
+<meta property="article:tag" content="Power Platform">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Sharing Copilot Studio agent with Org or users">
+<meta name="twitter:description" content="Step-by-step guide to sharing your Copilot Studio agent with specific users or your entire organisation.">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root { --ink: #1a1a18; --ink2: #4a4a46; --ink3: #9a9a94; --paper: #f9f7f2; --accent: #2d6a4f; --accent-light: #e8f4ee; --border: #e2dfd6; --serif: 'DM Serif Display', Georgia, serif; --sans: 'DM Sans', system-ui, sans-serif; }
-  html { scroll-behavior: smooth; }
   body { font-family: var(--sans); background: var(--paper); color: var(--ink); font-size: 16px; line-height: 1.6; }
   nav { position: sticky; top: 0; z-index: 100; background: rgba(249,247,242,0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 56px; }
   .nav-logo { font-family: var(--serif); font-size: 1.3rem; color: var(--ink); text-decoration: none; letter-spacing: -0.02em; }
@@ -28,7 +46,7 @@
   .post-body strong { color: var(--ink); font-weight: 500; }
   .post-body img { width: 100%; border-radius: 4px; margin: 1.5rem 0; border: 1px solid var(--border); }
   .post-body a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
-  .callout { background: #e8f4ee; border-left: 3px solid var(--accent); padding: 1rem 1.2rem; border-radius: 0 4px 4px 0; margin: 1.5rem 0; font-size: 0.95rem; }
+  .callout { background: #e8f4ee; border-left: 3px solid var(--accent); padding: 1rem 1.2rem; border-radius: 0 4px 4px 0; margin: 1.5rem 0; }
   footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--ink3); font-weight: 300; }
   footer a { color: var(--accent); text-decoration: none; }
 </style>
@@ -53,7 +71,7 @@
 
     <p>But if you want to share it with a specific user or entire org, click on the 3 dots and click on <strong>Share</strong>.</p>
 
-    <img src="https://justpowerplatform.wordpress.com/wp-content/uploads/2026/01/image.png" alt="Share option in Copilot Studio agent" />
+    <img src="https://justpowerplatform.wordpress.com/wp-content/uploads/2026/01/image.png" alt="Share option in Copilot Studio agent settings" />
 
     <p>Now select a user or entire org (My organization). Note that it gets the list of users from Entra ID for that environment. If you select "My organization" — it will share with all users who are in Entra ID of that specific environment.</p>
 
@@ -61,12 +79,12 @@
       Even if a user is present in Entra ID but does not have a role in that specific environment where the Copilot agent is hosted — it will still be shared to them and the user can still use it.
     </div>
 
-    <img src="https://justpowerplatform.wordpress.com/wp-content/uploads/2026/01/image-1.png" alt="Sharing with org or specific users in Copilot Studio" />
+    <img src="https://justpowerplatform.wordpress.com/wp-content/uploads/2026/01/image-1.png" alt="Sharing Copilot Studio agent with org or specific users" />
   </div>
 </article>
 
 <footer>
-  <p>© 2026 Lavkar · Built by <a href="../index.html">Chinmay Gandi</a></p>
+  <p>© 2026 Lavkar · <a href="../index.html">Chinmay Gandi</a></p>
 </footer>
 </body>
 </html>

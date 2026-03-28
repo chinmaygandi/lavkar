@@ -3,7 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Saving Money with Power Automate Premium — Lavkar</title>
+<title>Saving money with Power Automate Premium at org level — Lavkar</title>
+<meta name="description" content="How to reduce Power Automate Premium licensing costs at org level — use service account connections in Run Only Users so basic-license employees can trigger premium flows.">
+<meta name="author" content="Chinmay Gandi">
+<meta name="keywords" content="Power Automate Premium license cost, run only users, service account, Power Automate licensing, reduce Microsoft license cost, Power Platform cost saving">
+<link rel="canonical" href="https://lavkar.com/posts/saving-money-with-power-automate-premium.html">
+
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://lavkar.com/posts/saving-money-with-power-automate-premium.html">
+<meta property="og:title" content="Saving money with Power Automate Premium at org level">
+<meta property="og:description" content="Use service account connections in Run Only Users so basic-license employees can trigger premium flows — saving you from buying premium licenses for everyone.">
+<meta property="og:site_name" content="Lavkar">
+<meta property="article:published_time" content="2025-07-26">
+<meta property="article:author" content="Chinmay Gandi">
+<meta property="article:tag" content="Power Automate">
+<meta property="article:tag" content="Power Platform">
+<meta property="article:tag" content="Licensing">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Saving money with Power Automate Premium at org level">
+<meta name="twitter:description" content="Use service account connections in Run Only Users to avoid buying premium licenses for every employee.">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -14,7 +34,7 @@
   .nav-logo { font-family: var(--serif); font-size: 1.3rem; color: var(--ink); text-decoration: none; letter-spacing: -0.02em; }
   .nav-logo span { color: var(--accent); font-style: italic; }
   .nav-links { display: flex; gap: 2rem; list-style: none; }
-  .nav-links a { font-size: 0.85rem; color: var(--ink2); text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a { font-size: 0.85rem; font-weight: 400; color: var(--ink2); text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s; }
   .nav-links a:hover { color: var(--accent); }
   .post-wrap { max-width: 720px; margin: 0 auto; padding: 4rem 2rem 6rem; }
   .back-link { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.83rem; color: var(--ink3); text-decoration: none; margin-bottom: 2.5rem; transition: color 0.2s; }
@@ -52,28 +72,28 @@
   <div class="post-body">
     <p>Power Automate flows have an option called <strong>Run only users</strong> to specify in whose context the flow will run.</p>
 
-    <img src="https://justpowerplatform.wordpress.com/wp-content/uploads/2025/07/image-1.png" alt="Run only users option in Power Automate" />
+    <img src="https://justpowerplatform.wordpress.com/wp-content/uploads/2025/07/image-1.png" alt="Run only users option in Power Automate flow settings" />
 
     <p>You can have basic Microsoft licenses for all employees in the organization. If your flow is not using premium connectors or actions, the flow can be triggered by any user in the org.</p>
 
     <p>But if your flow <em>is</em> using premium actions or connectors — instead of buying a premium license for all employees, you can buy premium licenses for just a few service accounts and make them the owner of the flow.</p>
 
     <div class="callout-green">
-      In the flow's <strong>Run only users</strong> settings, select the service account connection rather than "Provided by run-only user". This way, basic-license employees can trigger the flow, but it runs under the service account. <strong>BOOM — you save cost.</strong>
+      In the flow's <strong>Run only users</strong> settings, select the service account connection rather than "Provided by run-only user". This way, basic-license employees can trigger the flow, but it runs under the service account. <strong>You save cost by only buying licenses for service accounts, not every employee.</strong>
     </div>
 
-    <img src="https://justpowerplatform.wordpress.com/wp-content/uploads/2025/07/image-2.png" alt="Selecting service account connection in run only users" />
+    <img src="https://justpowerplatform.wordpress.com/wp-content/uploads/2025/07/image-2.png" alt="Selecting service account connection in Run Only Users settings" />
 
     <div class="callout-warn">
-      <strong>Catch — read this carefully:</strong>
-      <p style="margin-top:0.6rem;margin-bottom:0">This option is available only for <strong>instant flows</strong> — meaning the flow must be triggered from Power Automate or Power Apps.</p>
-      <p style="margin-top:0.8rem;margin-bottom:0">Also remember: the flow runs under the service account's context. So if you have a premium connector that sends an email and you set the service account as the connection, the email will be sent <em>from that service account</em> — not from the user who triggered the flow. If you need to send email from the triggering user, this workaround won't help for that connector.</p>
+      <strong>Important catch:</strong>
+      <p style="margin-top:0.6rem;margin-bottom:0.6rem">This option is available only for <strong>instant flows</strong> — meaning the flow must be triggered from Power Automate or Power Apps.</p>
+      <p style="margin-bottom:0">Also remember: the flow runs under the service account's context. So if you have a premium connector that sends an email, the email will be sent <em>from that service account</em> — not from the user who triggered the flow. If you need to send email from the triggering user, this workaround won't work for that connector.</p>
     </div>
   </div>
 </article>
 
 <footer>
-  <p>© 2026 Lavkar · Built by <a href="../index.html">Chinmay Gandi</a></p>
+  <p>© 2026 Lavkar · <a href="../index.html">Chinmay Gandi</a></p>
 </footer>
 </body>
 </html>
