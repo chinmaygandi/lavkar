@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Add a Large PDF as Knowledge to Your Copilot Studio Agent — Lavkar</title>
+<meta name="description" content="Learn how to add a large PDF file as a knowledge source to your Copilot Studio agent using Azure AI Search and Azure Document Intelligence — the right enterprise approach.">
+<meta name="author" content="Chinmay Gandi">
+<link rel="canonical" href="https://lavkar.com/posts/adding-large-pdf-knowledge-copilot-studio.html">
+
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://lavkar.com/posts/adding-large-pdf-knowledge-copilot-studio.html">
+<meta property="og:title" content="How to Add a Large PDF as Knowledge to Your Copilot Studio Agent">
+<meta property="og:description" content="Learn how to add a large PDF file as a knowledge source to your Copilot Studio agent using Azure AI Search and Azure Document Intelligence — the right enterprise approach.">
+<meta property="og:site_name" content="Lavkar">
+<meta property="article:published_time" content="2026-06-27">
+<meta property="article:author" content="Chinmay Gandi">
+<meta property="article:tag" content="Copilot Studio">
+<meta property="article:tag" content="Power Platform">
+<meta property="article:tag" content="Azure AI Search">
+<meta property="article:tag" content="RAG">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="How to Add a Large PDF as Knowledge to Your Copilot Studio Agent">
+<meta name="twitter:description" content="Learn how to add a large PDF file as a knowledge source to your Copilot Studio agent — the right way.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How to Add a Large PDF as Knowledge to Your Copilot Studio Agent",
+  "description": "Learn how to add a large PDF file as a knowledge source to your Copilot Studio agent using Azure AI Search and Azure Document Intelligence — the right enterprise approach.",
+  "url": "https://lavkar.com/posts/adding-large-pdf-knowledge-copilot-studio.html",
+  "datePublished": "2026-06-27",
+  "dateModified": "2026-06-27",
+  "author": {
+    "@type": "Person",
+    "name": "Chinmay Gandi",
+    "url": "https://lavkar.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Lavkar",
+    "url": "https://lavkar.com"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://lavkar.com/posts/adding-large-pdf-knowledge-copilot-studio.html"
+  }
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --ink: #1a1a18; --ink2: #4a4a46; --ink3: #9a9a94; --paper: #f9f7f2; --accent: #2d6a4f; --accent-light: #e8f4ee; --border: #e2dfd6; --serif: 'DM Serif Display', Georgia, serif; --sans: 'DM Sans', system-ui, sans-serif; }
+  body { font-family: var(--sans); background: var(--paper); color: var(--ink); font-size: 16px; line-height: 1.6; }
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(249,247,242,0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 56px; }
+  .nav-logo { font-family: var(--serif); font-size: 1.3rem; color: var(--ink); text-decoration: none; letter-spacing: -0.02em; }
+  .nav-logo span { color: var(--accent); font-style: italic; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { font-size: 0.85rem; font-weight: 400; color: var(--ink2); text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+  .post-wrap { max-width: 720px; margin: 0 auto; padding: 4rem 2rem 6rem; }
+  .back-link { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.83rem; color: var(--ink3); text-decoration: none; margin-bottom: 2.5rem; transition: color 0.2s; }
+  .back-link:hover { color: var(--accent); }
+  .post-tag { display: inline-block; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); background: var(--accent-light); padding: 0.25rem 0.7rem; border-radius: 2rem; margin-bottom: 1rem; }
+  .post-title { font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1.2; letter-spacing: -0.03em; margin-bottom: 1rem; }
+  .post-meta { font-size: 0.83rem; color: var(--ink3); margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
+  .post-body { font-size: 1rem; line-height: 1.8; color: var(--ink2); }
+  .post-body p { margin-bottom: 1.4rem; }
+  .post-body h2 { font-family: var(--serif); font-size: 1.5rem; color: var(--ink); margin: 2.5rem 0 1rem; letter-spacing: -0.02em; }
+  .post-body h3 { font-size: 1rem; font-weight: 500; color: var(--ink); margin: 2rem 0 0.6rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  .post-body strong { color: var(--ink); font-weight: 500; }
+  .post-body img { width: 100%; border-radius: 4px; margin: 1.5rem 0; border: 1px solid var(--border); }
+  .post-body a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .post-body ul { margin: 0.8rem 0 1.4rem 1.4rem; }
+  .post-body ul li { margin-bottom: 0.4rem; }
+  .post-body ol { margin: 0.8rem 0 1.4rem 1.4rem; }
+  .post-body ol li { margin-bottom: 0.6rem; }
+  .callout { background: #e8f4ee; border-left: 3px solid var(--accent); padding: 1rem 1.2rem; border-radius: 0 4px 4px 0; margin: 1.5rem 0; }
+  .callout.warning { background: #fef9ec; border-left-color: #c8972a; }
+  .limit-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9rem; }
+  .limit-table th { background: var(--accent-light); color: var(--accent); font-weight: 500; text-align: left; padding: 0.6rem 0.9rem; border: 1px solid var(--border); }
+  .limit-table td { padding: 0.6rem 0.9rem; border: 1px solid var(--border); color: var(--ink2); }
+  .limit-table tr:nth-child(even) td { background: rgba(0,0,0,0.02); }
+  .step-number { display: inline-flex; align-items: center; justify-content: center; width: 1.8rem; height: 1.8rem; background: var(--accent); color: white; border-radius: 50%; font-size: 0.8rem; font-weight: 500; margin-right: 0.5rem; flex-shrink: 0; }
+  .step { display: flex; align-items: flex-start; gap: 0.6rem; margin-bottom: 1rem; }
+  .step-content { flex: 1; }
+  .code-block { background: #1a1a18; color: #e8f4ee; padding: 1rem 1.2rem; border-radius: 4px; font-family: monospace; font-size: 0.85rem; margin: 1rem 0 1.5rem; overflow-x: auto; line-height: 1.6; }
+  footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--ink3); font-weight: 300; }
+  footer a { color: var(--accent); text-decoration: none; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo">Lav<span>kar</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html#posts">Posts</a></li>
+    <li><a href="../index.html#about">About</a></li>
+  </ul>
+</nav>
+
+<article class="post-wrap">
+  <a href="../index.html" class="back-link">← All posts</a>
+  <span class="post-tag">Copilot Studio</span>
+  <h1 class="post-title">How to Add a Large PDF as Knowledge to Your Copilot Studio Agent</h1>
+  <p class="post-meta">June 27, 2026 &nbsp;·&nbsp; Chinmay Gandi</p>
+
+  <div class="post-body">
+
+    <p>Suppose you have a very large PDF — say a 20,000-page technical manual — and you want your Copilot Studio agent to answer questions from it. The first instinct is to just upload it directly as a knowledge source. But that will not work, and there is a good reason why.</p>
+
+    <p>In this post I will walk through why direct upload fails, how Copilot Studio actually reads knowledge internally, the right way to split your PDF so meaning is never lost, and how to set up Azure AI Search as a proper enterprise knowledge source for your agent.</p>
+
+    <h2>Why You Cannot Just Upload It Directly</h2>
+
+    <p>Copilot Studio has a hard file size limit of <strong>512 MB</strong> for direct uploads. A 20,000-page PDF will almost certainly be several gigabytes — so it will be rejected outright.</p>
+
+    <p>But even if it somehow fit under 512 MB, uploading a massive single file is still the wrong approach. To understand why, you need to know what happens under the hood when Copilot Studio reads knowledge.</p>
+
+    <h2>How Copilot Studio Actually Reads Knowledge</h2>
+
+    <p>There are two phases — indexing (happens once, in the background) and retrieval (happens every time a user asks a question).</p>
+
+    <h3>Phase 1 — Indexing</h3>
+
+    <p>When you add a file as a knowledge source, Copilot Studio reads it once and converts every piece of text into a <strong>vector embedding</strong> — a fingerprint of meaning represented as numbers. Similar meanings produce similar numbers. This is stored in Dataverse.</p>
+
+    <p>Think of it like building an index card for every paragraph in your document, where each card captures the meaning of that paragraph, not just the words.</p>
+
+    <h3>Phase 2 — Retrieval</h3>
+
+    <p>When a user asks a question, Copilot Studio converts that question into a vector fingerprint and compares it against all stored fingerprints. It finds the closest matches and retrieves only those chunks — it does not read the whole document every time.</p>
+
+    <div class="callout">
+      A critical limit here: Copilot Studio only reads the <strong>top 3 chunks</strong> per query when using SharePoint as a knowledge source. This means if a concept is spread across multiple files or chunks, the agent may never retrieve the full picture. Each chunk must be self-contained enough to answer a question on its own.
+    </div>
+
+    <h2>The Right Way to Split — So Meaning Never Breaks</h2>
+
+    <p>Since only the top 3 chunks are retrieved per query, how you split your PDF matters enormously. Here are the rules:</p>
+
+    <ul>
+      <li><strong>Split at natural boundaries</strong> — chapter headings, section headings, topic changes. Never mid-paragraph or mid-table.</li>
+      <li><strong>Each chunk should be self-contained</strong> — ask yourself: if someone read only this chunk, would they get a complete answer? If yes, it is a good chunk.</li>
+      <li><strong>Add overlap at boundaries</strong> — repeat 1–2 pages from the end of one chunk at the start of the next. This ensures a concept that bleeds across a boundary is still fully captured somewhere.</li>
+      <li><strong>Name files descriptively</strong> — instead of <code>chunk_001.pdf</code>, use <code>chapter3-treatment-methods-pages-120-189.pdf</code>. Copilot Studio uses file names and descriptions to decide which source to search.</li>
+    </ul>
+
+    <p>The sweet spot for chunk size is roughly <strong>20–50 pages</strong> for a technical document with clear sections. Too small and there is not enough context per chunk. Too large and the agent struggles to pinpoint the right answer.</p>
+
+    <h2>The Solution — Azure AI Search</h2>
+
+    <p>For any large PDF, Azure AI Search is the right approach. It gives you full control over chunking, uses smart document understanding via Azure Document Intelligence, and has no practical file size constraints.</p>
+
+    <p>The architecture looks like this: your PDF sits in Azure Blob Storage, Azure Document Intelligence reads it and understands its structure (headings, tables, paragraphs), splits it intelligently, and indexes everything into Azure AI Search. Your Copilot Studio agent then queries Azure AI Search directly.</p>
+
+    <h3>Step 1 — Create a Resource Group</h3>
+
+    <p>A Resource Group is just a folder that holds all your Azure services together. Go to <a href="https://portal.azure.com" target="_blank">portal.azure.com</a>, search for <strong>Resource Groups</strong>, and create one. Name it something like <code>rg-pdf-agent</code> and set the region to East US.</p>
+
+    <h3>Step 2 — Create Azure Blob Storage</h3>
+
+    <p>Search for <strong>Storage Accounts</strong> and create one in your resource group. Once created, go to <strong>Containers</strong>, create a container called <code>pdf-docs</code>, and upload your PDF into it. This is simply your cloud hard drive for the raw file.</p>
+
+    <h3>Step 3 — Create Azure AI Search</h3>
+
+    <p>Search for <strong>Azure AI Search</strong> and create an instance in your resource group. The <strong>Basic</strong> tier is sufficient to start. Once deployed, copy the <strong>Endpoint URL</strong> and the <strong>Primary Admin Key</strong> from the Keys section — you will need these later.</p>
+
+    <h3>Step 4 — Create Azure Document Intelligence</h3>
+
+    <p>Search for <strong>Document Intelligence</strong> and create an instance in your resource group using the <strong>S0 Standard</strong> tier. Copy the <strong>Key 1</strong> and <strong>Endpoint URL</strong> from the Keys and Endpoint section.</p>
+
+    <h3>Step 5 — Run the Import and Vectorize Wizard</h3>
+
+    <p>This is where Azure does all the heavy lifting for you — no code required.</p>
+
+    <ol>
+      <li>Go back to your <strong>Azure AI Search</strong> resource</li>
+      <li>Click <strong>Import and vectorize data</strong> on the Overview page</li>
+      <li>Select <strong>Azure Blob Storage</strong> as data source and point it to your <code>pdf-docs</code> container</li>
+      <li>On the next screen, turn on <strong>Extract text and structure from documents</strong> and select your Document Intelligence resource — this is what reads headings, paragraphs, and tables before splitting</li>
+      <li>Turn on <strong>Enable semantic chunking</strong> — this tells Azure to split at meaning boundaries, not fixed character counts</li>
+      <li>On the vectorization screen, select <strong>Azure OpenAI</strong> with model <code>text-embedding-ada-002</code></li>
+      <li>Name your index <code>pdf-index</code> and click Create</li>
+    </ol>
+
+    <p>Azure will now process your entire PDF. For a very large document this can take 30–60 minutes. You can watch the progress under <strong>Indexers</strong> in the left menu. Wait until the status shows <strong>Success</strong>.</p>
+
+    <div class="callout">
+      Azure Document Intelligence reads the structure of your PDF before splitting — so it knows where headings end and new sections begin. It splits at those natural boundaries automatically. This is what makes the answer quality significantly better than any manual splitting approach.
+    </div>
+
+    <h3>Step 6 — Connect Azure AI Search to Copilot Studio</h3>
+
+    <ol>
+      <li>Open your agent in Copilot Studio</li>
+      <li>Go to <strong>Knowledge</strong> → <strong>Add Knowledge</strong></li>
+      <li>Select <strong>Azure AI Search</strong></li>
+      <li>Enter the Endpoint URL and API Key you saved from Step 3</li>
+      <li>Select index name <code>pdf-index</code></li>
+      <li>Click Connect and wait for status to show <strong>Ready</strong></li>
+    </ol>
+
+    <p>Your agent can now answer questions from your entire document with accurate, cited responses.</p>
+
+    <p>The key thing to remember: the agent only retrieves the top 3 most relevant chunks per question. Azure Document Intelligence handles the splitting intelligently — at heading and section boundaries — which is what makes this approach so effective at scale. Every chunk it produces is a self-contained idea, which means those top 3 results are almost always enough to form a complete, accurate answer.</p>
+
+  </div>
+</article>
+
+<footer>
+  <p>© 2026 Lavkar · <a href="../index.html">Chinmay Gandi</a></p>
+</footer>
+</body>
+</html>
